@@ -1,0 +1,20 @@
+@import "reset";
+@import "modules/global";
+
+html {
+  color: $black;
+  font-family: $mainFont;
+}
+
+//html {
+//  @media screen and (max-width: $desktopWidth) {
+//    font-size: 16px;
+//  }
+//  @media screen and (max-width: $tableWidth) {
+//    font-size: 14px;
+//  }
+//  @media screen and (max-width: $phoneWidth) {
+//    font-size: 12px;
+//  }
+//}
+
