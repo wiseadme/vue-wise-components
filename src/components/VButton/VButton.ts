@@ -1,33 +1,53 @@
 import Vue from 'vue'
-import { VNode } from 'vue/types'
+import { VNode, VNodeData } from 'vue/types'
 import './VButton.scss'
-
-// import { mixins } from '@/utils/mixins'
 
 export default Vue.extend({
   name: 'VButton',
   props: {
     text: String,
-    type: String
+    type: String,
+    color: String,
+    actionButton: Boolean
   },
 
   computed: {
-    __content(): VNode {
-      return this.$createElement('span', {
-        staticClass: 'v-button__text',
-        attrs: {
-          id: 'button'
+    content(): VNode {
+      return this.$createElement('span',
+        {
+          staticClass: 'v-button__text',
+        },
+        this.text
+      )
+    },
+
+    renderData(): VNodeData {
+      return {
+        staticClass: 'v-button',
+        class: {
+          ...this.classes
+        },
+        style: {
+          backgroundColor: this.color
         }
-      }, this.text)
+      }
+    },
+
+    classes(): object {
+      const classes: Record<string, boolean> = {
+        'v-button--action': this.actionButton,
+        'v-button--default': !this.actionButton,
+      }
+      return classes
     }
   },
 
   render(h): VNode {
-    return h('button',
-      {
-        staticClass: 'v-button'
-      },
-      [this.__content]
-    )
+    const content = [this.content]
+    for (let key in this.$slots) {
+      // @ts-ignore
+      content.push(this.$slots[key])
+    }
+    return h('button', this.renderData, content)
   }
 })

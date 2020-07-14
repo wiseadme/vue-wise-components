@@ -1,9 +1,12 @@
 import { VueConstructor } from 'vue'
 import VButton from '@/components/VButton'
+import { withFunctional } from '@/utils/hoc'
 
 export default {
   install(Vue: VueConstructor) {
-    Vue.component('VButton', VButton)
+    const func = withFunctional(VButton)
+    console.log(func)
+    Vue.component('VButton', withFunctional(VButton))
   }
 }
 
