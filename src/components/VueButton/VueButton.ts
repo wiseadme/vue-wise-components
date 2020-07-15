@@ -66,10 +66,8 @@ export default Vue.extend({
   },
 
   render(h): VNode {
-    const content = [
-      this.content,
-      this.slotContent
-    ]
+    if (this.slotContent) this.content.children!.push(this.slotContent!)
+    const content = [this.content]
     return h('button', this.renderData, content)
   }
 })
