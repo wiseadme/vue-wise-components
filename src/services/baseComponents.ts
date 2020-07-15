@@ -1,18 +1,19 @@
 import { VueConstructor } from 'vue'
-import { withFunctional } from '@/utils/hoc'
 
 // components
-import VButton from '@/components/VButton'
+import VueButton from '@/components/VueButton'
+import VueModal from '@/components/VueModal'
 
 const components: object = {
-  VButton
+  VueButton,
+  VueModal
 }
 
 export default {
   install(Vue: VueConstructor) {
     Object.keys(components).forEach(key => {
       // @ts-ignore
-      Vue.component(key, withFunctional(components[key]))
+      Vue.component(key, components[key])
     })
   }
 }

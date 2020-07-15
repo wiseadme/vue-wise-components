@@ -155,10 +155,6 @@ module.exports = {
       { from: `${ PATH.src }/assets/`, to: `${ PATH.assets }` },
     ]),
 
-    new webpack.DefinePlugin({
-      ['process.env.API_URL']: JSON.stringify(process.env.API_URL)
-    }),
-
     new VueLoaderPlugin()
   ],
 }

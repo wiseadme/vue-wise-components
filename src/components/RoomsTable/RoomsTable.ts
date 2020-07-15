@@ -7,4 +7,8 @@ import './RoomsTable.scss'
 export default class RoomsTable extends Vue {
   @Prop() text!: string
   @Prop({ default: () => false }) actionBtn!: boolean
+
+  showLog() {
+    // console.log('clicked')
+  }
 }

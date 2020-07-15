@@ -1,9 +1,22 @@
-<div class="rooms-table">
-  <div class="inner-wrap">
-    <div class="btn-wrap">
-      <v-button text="hello" type="info" :action-button="false">
-        <span>icon</span>
-      </v-button>
-    </div>
+<div class="rooms">
+  <div class="rooms-wrap">
+    <vue-button
+      text="hello"
+      type="success"
+      :disabled="false"
+      @click="showLog"
+      v-slot="some"
+    />
+    <vue-modal>
+      <template slot="body">
+        <span>body</span>
+      </template>
+      <div class="btn-wrap" slot="footer">
+        <vue-button
+          text="ok"
+          type="primary"
+        />
+      </div>
+    </vue-modal>
   </div>
 </div>

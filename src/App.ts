@@ -6,7 +6,7 @@ import './assets/scss/main.scss'
   template: `
     <div id="app">
       <transition name="fadeIn" mode="out-in">
-        <router-view/>
+        <rooms-table/>
       </transition>
     </div>`,
 

@@ -1,5 +1,5 @@
 import { VNode } from 'vue/types'
-import { VNodeCreator } from '@/Types'
+import { VNodeCreator } from '@/types'
 
 export const withFunctional = <T>(component: T) => ({
   functional: true,
