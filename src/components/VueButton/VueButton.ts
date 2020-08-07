@@ -61,12 +61,15 @@ export default Vue.extend({
       return {
         [`vue-button--${ this.type }`]: !this.color && !this.disabled,
         'vue-button--disabled': this.disabled,
+        [this.color]: !!this.color
       }
     }
   },
 
   render(h): VNode {
-    if (this.slotContent) this.content.children!.push(this.slotContent!)
+    if (this.slotContent) {
+      this.content.children!.push(this.slotContent!)
+    }
     const content = [this.content]
     return h('button', this.renderData, content)
   }

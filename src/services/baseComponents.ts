@@ -3,10 +3,12 @@ import { VueConstructor } from 'vue'
 // components
 import VueButton from '@/components/VueButton'
 import VueModal from '@/components/VueModal'
+import VueChips from '@/components/VueChip/VueChip'
 
 const components: object = {
   VueButton,
-  VueModal
+  VueModal,
+  VueChip: VueChips
 }
 
 export default {
