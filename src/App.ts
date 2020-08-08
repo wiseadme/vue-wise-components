@@ -8,19 +8,20 @@ import './assets/scss/main.scss'
         text="hello"
         type="success"
         :disabled="false"
-        @click="showLog"
+        @click="showModal = true"
         v-slot="some"
       />
-      <div class="chip-wrap red-darken-1" :style="{width: '80px', height: '25px', position: 'relative'}">
         <vue-chip
           :disable="false"
           :selected="false"
           text="09:00"
-        >
-          <i class="icon" slot="icon">icon</i>
-        </vue-chip>
-      </div>
-      <vue-modal class="orange--darken-1">
+        />
+      <vue-modal
+        :overlay-show="true"
+        :close-button="true"
+        transition="scaleIn"
+        v-model="showModal"
+      >
         <template slot="body">
           <span>body</span>
         </template>
@@ -28,16 +29,15 @@ import './assets/scss/main.scss'
           <vue-button
             text="ok"
             type="primary"
-          >
-            <span>icon here</span>
-          </vue-button>
+            @click="showModal = !showModal"
+          />
         </div>
       </vue-modal>
     </div>`,
 })
 
 export default class App extends Vue {
-  showLog() {
+  showModal: boolean = true
 
-  }
+  showLog() {/*something here*/}
 }

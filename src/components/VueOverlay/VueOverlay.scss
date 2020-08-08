@@ -1,0 +1,23 @@
+.vue-overlay {
+  @include flex(center, center);
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, .4);
+  opacity: 0;
+  transition: opacity .3s;
+
+  &--hidden {
+    opacity: 0;
+  }
+
+  &--active {
+    opacity: 1;
+    z-index: 100;
+    transition: opacity .3s;
+  }
+}
+
+

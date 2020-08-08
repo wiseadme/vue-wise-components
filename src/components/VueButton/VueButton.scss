@@ -1,31 +1,25 @@
-// mixins
-@mixin active($activeColor) {
-  background: $activeColor;
-  box-shadow: none;
-  transition: all .2s linear;
-}
-
-// styles
 .vue-button {
   position: relative;
-  height: 7.5vw;
-  max-height: 40px;
+  height: 40px;
   min-width: 80px;
   font-size: 0.8em;
   text-transform: uppercase;
-  color: $white;
   cursor: pointer;
   border-radius: 3px;
   border: none;
   outline: none;
-  box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.5);
   transition: box-shadow 0.3s ease;
   overflow: hidden;
+  user-select: none;
+  vertical-align: middle;
+  white-space: nowrap;
 
   &:after {
     content: "";
     display: block;
     position: absolute;
+    z-index: 1;
     bottom: 0;
     left: 0;
     width: 100%;
@@ -48,7 +42,7 @@
   }
 
   &:hover {
-    box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.5);
 
     &:active {
       box-shadow: none;
@@ -92,5 +86,9 @@
         height: 0;
       }
     }
+  }
+
+  &__text {
+    color: $white;
   }
 }

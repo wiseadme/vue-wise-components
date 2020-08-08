@@ -1,49 +1,112 @@
+// styles
 import './VueModal.scss'
 
+// Vue and vue types
 import Vue from 'vue'
-import { VNode, VNodeData } from 'vue/types'
+import { VNode } from 'vue/types'
 
+//helpers
 import { getSlot } from '@/helpers'
 
-export default Vue.extend({
+// mixins
+import Overlayable from '@/mixins/Overlayable'
+
+
+type VueExtendable = typeof Overlayable
+
+//@ts-ignore
+export default Vue.extend<VueExtendable>().extend({
   name: 'VueModal',
 
-  methods: {
-    createVNode(
-      tag: string,
-      dataObject: VNodeData,
-      children: any = null
-    ): VNode | null {
-      if (children) {
-        return this.$createElement(tag, dataObject, children)
-      }
-      return null
+  mixins: [Overlayable],
+
+  props: {
+    closeButton: Boolean,
+    transition: String,
+    overlayShow: Boolean,
+    value: Boolean
+  },
+
+  watch: {
+    value() {
+      this.hideOverlay = !this.hideOverlay
     }
   },
 
-  computed: {
-    body(): VNode | null {
-      return this.createVNode('div', {
-        staticClass: 'vue-modal__body',
-        slot: 'body'
-      }, getSlot(this, 'body'))
+  methods: {
+    genTransition(content: VNode | VNode[]): VNode | null {
+      if (!this.transition) return content as VNode
+      return this.$createElement('transition', {
+        props: {
+          name: this.transition,
+          appear: true,
+        }
+      }, [content])
     },
 
-    footer(): VNode | null {
-      return this.createVNode('div', {
-        staticClass: 'vue-modal__footer',
-        slot: 'footer'
-      }, getSlot(this, 'footer'))
+    genContent(): VNode[] {
+      const children: VNode[] = []
+      const keys = Object.keys(this.$slots)
+
+      if (this.closeButton) {
+        children.push(this.close)
+      }
+
+      for (const key of keys) {
+        if (this.$slots[key]) {
+          const vnode = this.$createElement('div', {
+            slot: key,
+            staticClass: `vue-modal__${ key }`
+          }, getSlot(this, key))
+          children.push(vnode!)
+        }
+      }
+
+      return children
+    },
+  },
+
+  computed: {
+
+    container(): VNode {
+      return this.$createElement('div', {
+        staticClass: 'vue-modal-container',
+        directives: [
+          {
+            name: 'show',
+            value: this.value
+          }
+        ]
+      }, [])
+    },
+
+    modal(): VNode {
+      return this.$createElement('div', {
+        staticClass: 'vue-modal',
+      }, [])
+    },
+
+    close(): VNode {
+      return this.$createElement('span', {
+        staticClass: 'vue-modal__close',
+        on: {
+          click: () => {
+            this.hideOverlay = true
+          }
+        }
+      }, 'close')
     }
   },
 
   render(h): VNode {
-    const content: VNode[] = [
-      this.body!,
-      this.footer!
-    ]
-    return h('div', {
-      staticClass: 'vue-modal'
-    }, content)
+    if (!this.container.children!.length) {
+      this.modal.children = this.genContent()
+
+      this.container.children!.push(this.modal)
+    }
+
+    return h('transition', {}, [
+      this.genTransition(this.container)
+    ])
   }
 })

@@ -5,7 +5,12 @@ import { VNode, VNodeData } from 'vue/types'
 
 import { getSlot } from '@/helpers'
 
-const btnTypes: string[] = ['primary', 'success', 'warning', 'danger']
+const buttonTypes: string[] = [
+  'primary',
+  'success',
+  'warning',
+  'danger'
+]
 
 export default Vue.extend({
   name: 'VueButton',
@@ -14,7 +19,7 @@ export default Vue.extend({
     type: {
       type: String,
       validator(value: string): boolean {
-        return btnTypes.includes(value)
+        return buttonTypes.includes(value)
       }
     },
     color: String,
