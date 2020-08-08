@@ -1,6 +1,10 @@
+// Vue constructor
 import Vue from 'vue'
 
+// components
 import VueOverlay from '@/components/VueOverlay'
+
+// helpers
 import { addOnceEventListener } from '@/helpers'
 
 export default Vue.extend({
@@ -33,7 +37,7 @@ export default Vue.extend({
 
   methods: {
     createOverlay() {
-      const overlay = new VueOverlay({})
+      const overlay = new VueOverlay()
       overlay.$mount()
 
       const parent = this.$el.parentNode
@@ -41,9 +45,7 @@ export default Vue.extend({
 
       this.overlay = overlay
 
-      setTimeout(() => {
-        this.overlay!.active = true
-      }, 50)
+      setTimeout(() => this.overlay!.active = true, 50)
     },
 
     genOverlay() {
@@ -55,11 +57,11 @@ export default Vue.extend({
       if (this.overlay) {
         this.overlay!.hide = true
         this.overlay!.active = false
+
         addOnceEventListener(
           this.overlay.$el,
           'transitionend',
           () => {
-
             if (!this.overlay || !this.overlay.$el) return
 
             this.overlay!.$el.parentNode!.removeChild(this.overlay!.$el)

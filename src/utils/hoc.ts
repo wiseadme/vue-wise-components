@@ -1,10 +1,10 @@
 import { VNode } from 'vue/types'
-import { VNodeCreator } from '@/types'
+// import { VNodeCreator } from '@/types'
 
 export const withFunctional = <T>(component: T) => ({
   functional: true,
   name: 'withFunctional',
-  render(h: VNodeCreator<(...arg: any[]) => VNode>, context: any): VNode {
+  render(h: Function, context: any): VNode {
     return h(
       component,
       {

@@ -5,7 +5,7 @@ import './VueModal.scss'
 import Vue from 'vue'
 import { VNode } from 'vue/types'
 
-//helpers
+// helpers
 import { getSlot } from '@/helpers'
 
 // mixins
@@ -14,14 +14,13 @@ import Overlayable from '@/mixins/Overlayable'
 
 type VueExtendable = typeof Overlayable
 
-//@ts-ignore
+// @ts-ignore
 export default Vue.extend<VueExtendable>().extend({
   name: 'VueModal',
 
   mixins: [Overlayable],
 
   props: {
-    closeButton: Boolean,
     transition: String,
     overlayShow: Boolean,
     value: Boolean
@@ -47,10 +46,6 @@ export default Vue.extend<VueExtendable>().extend({
     genContent(): VNode[] {
       const children: VNode[] = []
       const keys = Object.keys(this.$slots)
-
-      if (this.closeButton) {
-        children.push(this.close)
-      }
 
       for (const key of keys) {
         if (this.$slots[key]) {
@@ -84,17 +79,6 @@ export default Vue.extend<VueExtendable>().extend({
       return this.$createElement('div', {
         staticClass: 'vue-modal',
       }, [])
-    },
-
-    close(): VNode {
-      return this.$createElement('span', {
-        staticClass: 'vue-modal__close',
-        on: {
-          click: () => {
-            this.hideOverlay = true
-          }
-        }
-      }, 'close')
     }
   },
 

@@ -11,19 +11,24 @@ import './assets/scss/main.scss'
         @click="showModal = true"
         v-slot="some"
       />
-        <vue-chip
-          :disable="false"
-          :selected="false"
-          text="09:00"
-        />
+      <vue-chip
+        :disable="false"
+        :selected="false"
+        text="09:00"
+      />
       <vue-modal
         :overlay-show="true"
-        :close-button="true"
         transition="scaleIn"
         v-model="showModal"
       >
+        <div
+          slot="header"
+          class="modal-header cyan--darken-1"
+        >
+          warning
+        </div>
         <template slot="body">
-          <span>body</span>
+          <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab ad amet, aspernatur, consectetur deserunt eius ex inventore iure, iusto minima officia quisquam reprehenderit repudiandae temporibus tenetur. Ab alias aliquam aspernatur beatae commodi delectus fuga maiores, nesciunt, provident quaerat, rem sit.</span>
         </template>
         <div class="btn-wrap" slot="footer">
           <vue-button
@@ -38,6 +43,4 @@ import './assets/scss/main.scss'
 
 export default class App extends Vue {
   showModal: boolean = true
-
-  showLog() {/*something here*/}
 }
