@@ -17,9 +17,9 @@ import './assets/scss/main.scss'
         text="09:00"
       />
       <vue-modal
-        :overlay-show="true"
-        transition="scaleIn"
         v-model="showModal"
+        :overlay="true"
+        transition="scaleIn"
       >
         <div
           slot="header"
@@ -43,4 +43,5 @@ import './assets/scss/main.scss'
 
 export default class App extends Vue {
   showModal: boolean = true
+  text: string = ''
 }

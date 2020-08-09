@@ -1,4 +1,5 @@
 .vue-button {
+  @include flex(center, center);
   position: relative;
   height: 40px;
   min-width: 80px;
@@ -90,5 +91,9 @@
 
   &__text {
     color: $white;
+    margin: 0 2.5px;
+  }
+  &__content {
+    margin: 0 2.5px;
   }
 }

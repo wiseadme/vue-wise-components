@@ -31,7 +31,7 @@ export default Vue.extend({
       return this.$createElement('span',
         {
           staticClass: 'vue-button__text',
-        }, this.text)
+        }, [this.text])
     },
 
     slotContent(): VNode | null {
@@ -72,10 +72,10 @@ export default Vue.extend({
   },
 
   render(h): VNode {
-    if (this.slotContent) {
-      this.content.children!.push(this.slotContent!)
-    }
     const content = [this.content]
-    return h('button', this.renderData, content)
+    if (this.slotContent) {
+      content.push(this.slotContent!)
+    }
+    return h('button', this.renderData, [content])
   }
 })

@@ -12,27 +12,16 @@ export default Vue.extend({
 
   data() {
     return {
-      overlay: null as InstanceType<typeof VueOverlay> | null,
+      overlayComponent: null as InstanceType<typeof VueOverlay> | null,
       hideOverlay: false,
     }
   },
 
   watch: {
     hideOverlay(value: boolean) {
-      if (value) {
-        this.removeOverlay()
-      } else {
-        this.genOverlay()
-      }
+      value && this.removeOverlay()
+      !value && this.genOverlay()
     },
-  },
-
-  beforeMount() {
-    this.$nextTick(() => this.genOverlay())
-  },
-
-  beforeDestroy() {
-    this.removeOverlay()
   },
 
   methods: {
@@ -41,11 +30,13 @@ export default Vue.extend({
       overlay.$mount()
 
       const parent = this.$el.parentNode
-      parent && parent.insertBefore(overlay.$el, this.$el)
+      parent && parent.insertBefore(overlay.$el, parent.firstChild)
 
-      this.overlay = overlay
+      this.overlayComponent = overlay
 
-      setTimeout(() => this.overlay!.active = true, 50)
+      setTimeout(() => {
+        this.overlayComponent!.active = true
+      }, 50)
     },
 
     genOverlay() {
@@ -54,19 +45,19 @@ export default Vue.extend({
     },
 
     removeOverlay() {
-      if (this.overlay) {
-        this.overlay!.hide = true
-        this.overlay!.active = false
+      if (this.overlayComponent) {
+        this.overlayComponent!.hide = true
+        this.overlayComponent!.active = false
 
         addOnceEventListener(
-          this.overlay.$el,
+          this.overlayComponent.$el,
           'transitionend',
           () => {
-            if (!this.overlay || !this.overlay.$el) return
+            if (!this.overlayComponent || !this.overlayComponent.$el) return
 
-            this.overlay!.$el.parentNode!.removeChild(this.overlay!.$el)
-            this.overlay!.$destroy()
-            this.overlay = null
+            this.overlayComponent!.$el.parentNode!.removeChild(this.overlayComponent!.$el)
+            this.overlayComponent!.$destroy()
+            this.overlayComponent = null
           }
         )
       }

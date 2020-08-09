@@ -8,18 +8,24 @@
   "scripts": {
     "dev": "webpack-dev-server --config ./build/webpack.dev.conf.js",
     "build": "webpack --config ./build/webpack.build.conf.js",
-    "start": "http-server ./dist -a localhost -p 5000 -c-1"
+    "start": "http-server ./dist -a localhost -p 5000 -c-1",
+    "storybook": "start-storybook"
   },
   "browserslist": [
     ">1%",
     "last 5 version"
   ],
-
   "devDependencies": {
     "@babel/core": "^7.6.0",
     "@babel/preset-env": "^7.6.0",
+    "@storybook/addon-actions": "^5.3.19",
+    "@storybook/addon-knobs": "^5.3.19",
+    "@storybook/preset-scss": "^1.0.2",
+    "@storybook/preset-typescript": "^3.0.0",
+    "@storybook/vue": "^5.3.19",
     "autoprefixer": "^9.6.1",
     "babel-loader": "^8.0.6",
+    "babel-preset-vue": "^2.0.2",
     "copy-webpack-plugin": "^5.1.1",
     "cross-env": "^7.0.2",
     "css-loader": "^3.2.0",
@@ -27,6 +33,7 @@
     "cssnano": "^4.1.10",
     "dotenv": "^8.2.0",
     "file-loader": "^4.2.0",
+    "fork-ts-checker-webpack-plugin": "^5.0.14",
     "html-webpack-plugin": "^3.2.0",
     "mini-css-extract-plugin": "^0.8.0",
     "node-sass": "^4.13.1",

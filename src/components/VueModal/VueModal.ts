@@ -11,7 +11,6 @@ import { getSlot } from '@/helpers'
 // mixins
 import Overlayable from '@/mixins/Overlayable'
 
-
 type VueExtendable = typeof Overlayable
 
 // @ts-ignore
@@ -22,17 +21,29 @@ export default Vue.extend<VueExtendable>().extend({
 
   props: {
     transition: String,
-    overlayShow: Boolean,
+    overlay: Boolean,
     value: Boolean
+  },
+
+  beforeMount() {
+    this.overlay && this.$nextTick(() => this.genOverlay())
+  },
+
+  beforeDestroy() {
+    this.overlay && this.removeOverlay()
   },
 
   watch: {
     value() {
-      this.hideOverlay = !this.hideOverlay
-    }
+      this.overlay && this.toggleOverlay()
+    },
   },
 
   methods: {
+    toggleOverlay() {
+      this.hideOverlay = !this.hideOverlay
+    },
+
     genTransition(content: VNode | VNode[]): VNode | null {
       if (!this.transition) return content as VNode
       return this.$createElement('transition', {
@@ -48,11 +59,14 @@ export default Vue.extend<VueExtendable>().extend({
       const keys = Object.keys(this.$slots)
 
       for (const key of keys) {
+
         if (this.$slots[key]) {
+
           const vnode = this.$createElement('div', {
             slot: key,
             staticClass: `vue-modal__${ key }`
           }, getSlot(this, key))
+
           children.push(vnode!)
         }
       }
@@ -62,7 +76,6 @@ export default Vue.extend<VueExtendable>().extend({
   },
 
   computed: {
-
     container(): VNode {
       return this.$createElement('div', {
         staticClass: 'vue-modal-container',
@@ -71,7 +84,8 @@ export default Vue.extend<VueExtendable>().extend({
             name: 'show',
             value: this.value
           }
-        ]
+        ],
+        ref: 'modal'
       }, [])
     },
 
@@ -83,11 +97,9 @@ export default Vue.extend<VueExtendable>().extend({
   },
 
   render(h): VNode {
-    if (!this.container.children!.length) {
-      this.modal.children = this.genContent()
+    this.modal.children = this.genContent()
 
-      this.container.children!.push(this.modal)
-    }
+    this.container.children!.push(this.modal)
 
     return h('transition', {}, [
       this.genTransition(this.container)
