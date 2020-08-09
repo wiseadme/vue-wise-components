@@ -6,29 +6,32 @@ const story = storiesOf('VueButton', module)
 
 story.addDecorator(withKnobs)
 
-story.add('primary', () => ({
+story.add('types', () => ({
   methods: {
-    addClick: () => action('clicked')
+    action: () => action('clicked')
   },
   props: {
     text: {
-      default: text('btn-label', 'stop')
+      default: text('btn-label', 'primary')
     }
   },
   template: `
-    <div class="btn-wrap">
-      <vue-button type="primary" :text="text" @click="addClick">some icon</vue-button>
+    <div :style="{width: '100%', display: 'flex'}">
+      <div class="btn-wrap">
+        <vue-button type="primary" :text="text" @click="action"></vue-button>
+      </div>      
+      <div class="btn-wrap">
+        <vue-button type="success" text="success" @click="action"></vue-button>
+      </div>      
+      <div class="btn-wrap">
+        <vue-button type="warning" text="warning" @click="action"></vue-button>
+      </div>      
+      <div class="btn-wrap">
+        <vue-button type="danger" text="danger" @click="action"></vue-button>
+      </div>      
+      <div class="btn-wrap">
+        <vue-button class="teal--darken-1" text="colored" @click="action"></vue-button>
+      </div>
     </div>`
 }))
-  .add('success', () => ({
-    template: `
-      <div class="btn-wrap">
-        <vue-button type="success" text="send"></vue-button>
-      </div>`
-  }))
-  .add('warning', () => ({
-    template: `
-      <div class="btn-wrap">
-        <vue-button type="warning" text="send"></vue-button>
-      </div>`
-  }))
+

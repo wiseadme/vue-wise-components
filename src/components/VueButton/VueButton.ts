@@ -16,14 +16,14 @@ export default Vue.extend({
   name: 'VueButton',
   props: {
     text: String,
+    color: String,
+    disabled: Boolean,
     type: {
       type: String,
       validator(value: string): boolean {
         return buttonTypes.includes(value)
       }
     },
-    color: String,
-    disabled: Boolean
   },
 
   computed: {
@@ -65,7 +65,7 @@ export default Vue.extend({
     classes(): Record<string, boolean> {
       return {
         [`vue-button--${ this.type }`]: !this.color && !this.disabled,
-        'vue-button--disabled': this.disabled,
+        ['vue-button--disabled']: this.disabled,
         [this.color]: !!this.color
       }
     }
@@ -73,9 +73,11 @@ export default Vue.extend({
 
   render(h): VNode {
     const content = [this.content]
+
     if (this.slotContent) {
       content.push(this.slotContent!)
     }
+
     return h('button', this.renderData, [content])
   }
 })

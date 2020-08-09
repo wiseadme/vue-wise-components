@@ -6,7 +6,6 @@ import Vue from 'vue'
 
 export default Vue.extend({
   name: 'VueOverlay',
-  functional: true,
   props: {
     hide: {
       type: Boolean,

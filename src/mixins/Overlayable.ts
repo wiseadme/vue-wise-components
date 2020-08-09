@@ -1,10 +1,10 @@
 // Vue constructor
 import Vue from 'vue'
 
-// components
+// Components
 import VueOverlay from '@/components/VueOverlay'
 
-// helpers
+// Helpers
 import { addOnceEventListener } from '@/helpers'
 
 export default Vue.extend({
@@ -19,6 +19,7 @@ export default Vue.extend({
 
   watch: {
     hideOverlay(value: boolean) {
+      console.log('v overlayable watch')
       value && this.removeOverlay()
       !value && this.genOverlay()
     },
@@ -40,7 +41,7 @@ export default Vue.extend({
     },
 
     genOverlay() {
-      if (this.hideOverlay) return
+      if (this.hideOverlay && this.overlayComponent) return
       this.createOverlay()
     },
 

@@ -1,14 +1,14 @@
 // styles
 import './VueModal.scss'
 
-// Vue and vue types
-import Vue from 'vue'
+// Types
 import { VNode } from 'vue/types'
 
-// helpers
+// Helpers
+import Vue from 'vue'
 import { getSlot } from '@/helpers'
 
-// mixins
+// Mixins
 import Overlayable from '@/mixins/Overlayable'
 
 type VueExtendable = typeof Overlayable
@@ -26,7 +26,9 @@ export default Vue.extend<VueExtendable>().extend({
   },
 
   beforeMount() {
-    this.overlay && this.$nextTick(() => this.genOverlay())
+    this.overlay && this.$nextTick(() => {
+      this.genOverlay()
+    })
   },
 
   beforeDestroy() {
@@ -36,6 +38,7 @@ export default Vue.extend<VueExtendable>().extend({
   watch: {
     value() {
       this.overlay && this.toggleOverlay()
+      console.log('v modale watch')
     },
   },
 
@@ -46,6 +49,7 @@ export default Vue.extend<VueExtendable>().extend({
 
     genTransition(content: VNode | VNode[]): VNode | null {
       if (!this.transition) return content as VNode
+
       return this.$createElement('transition', {
         props: {
           name: this.transition,
