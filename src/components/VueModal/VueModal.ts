@@ -1,11 +1,13 @@
-// styles
+// Styles
 import './VueModal.scss'
+
+// Constructor
+import Vue from 'vue'
 
 // Types
 import { VNode } from 'vue/types'
 
 // Helpers
-import Vue from 'vue'
 import { getSlot } from '@/helpers'
 
 // Mixins
@@ -38,7 +40,6 @@ export default Vue.extend<VueExtendable>().extend({
   watch: {
     value() {
       this.overlay && this.toggleOverlay()
-      console.log('v modale watch')
     },
   },
 

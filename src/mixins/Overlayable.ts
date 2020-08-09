@@ -19,7 +19,6 @@ export default Vue.extend({
 
   watch: {
     hideOverlay(value: boolean) {
-      console.log('v overlayable watch')
       value && this.removeOverlay()
       !value && this.genOverlay()
     },
