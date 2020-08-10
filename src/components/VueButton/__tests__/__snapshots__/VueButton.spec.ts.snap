@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VueButton.ts make snapshot 1`] = `
+<button
+  class="vue-button vue-button--success"
+>
+  <span
+    class="vue-button__text"
+  >
+    send
+  </span>
+</button>
+`;

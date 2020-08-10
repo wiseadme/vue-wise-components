@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import App from './App'
-import baseComponents from './services/baseComponents'
+import baseComponents from '@/services/baseComponents'
 
 Vue.use(baseComponents)
 

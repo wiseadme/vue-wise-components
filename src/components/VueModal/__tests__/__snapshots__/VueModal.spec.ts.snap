@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VueModal.ts show overlay if passed to true 1`] = `
+<transition-stub
+  valid="true"
+>
+  <div
+    class="vue-modal-container"
+    style="display: none;"
+  >
+    <div
+      class="vue-modal"
+    />
+  </div>
+</transition-stub>
+`;

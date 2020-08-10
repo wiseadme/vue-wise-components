@@ -3,18 +3,19 @@ import { VueConstructor } from 'vue'
 // components
 import VueButton from '@/components/VueButton'
 import VueModal from '@/components/VueModal'
-import VueChip from '@/components/VueChip/VueChip'
+import VueChip from '@/components/VueChip'
+import VueOverlay from '@/components/VueOverlay'
 
-const components: object = {
+const components: { [key: string]: any } = {
   VueButton,
   VueModal,
-  VueChip
+  VueChip,
+  VueOverlay
 }
 
 export default {
   install(Vue: VueConstructor) {
     Object.keys(components).forEach(key => {
-      // @ts-ignore
       Vue.component(key, components[key])
     })
   }

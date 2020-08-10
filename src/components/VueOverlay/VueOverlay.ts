@@ -1,25 +1,31 @@
-// styles
+// Styles
 import './VueOverlay.scss'
 
-// Vue constructor
+// Constructor
 import Vue from 'vue'
+import { VNode } from 'vue/types'
 
 export default Vue.extend({
   name: 'VueOverlay',
   props: {
-    hide: {
-      type: Boolean,
-      default: () => false
-    },
+    hide: Boolean,
     active: Boolean
   },
 
-  render(h) {
+  computed: {
+    classes(): Record<string, boolean> {
+      return {
+        ['vue-overlay--hidden']: this.hide,
+        ['vue-overlay--active']: this.active,
+      }
+    }
+  },
+
+  render(h): VNode {
     return h('div', {
       staticClass: 'vue-overlay',
       class: {
-        'vue-overlay--hidden': this.hide,
-        'vue-overlay--active': this.active,
+        ...this.classes
       }
     }, this.$slots.default)
   }

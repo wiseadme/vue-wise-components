@@ -1,11 +1,9 @@
 // Styles
 import './VueModal.scss'
 
-// Constructor
-import Vue from 'vue'
-
 // Types
 import { VNode } from 'vue/types'
+import { mixins } from '@/utils/mixins'
 
 // Helpers
 import { getSlot } from '@/helpers'
@@ -13,10 +11,8 @@ import { getSlot } from '@/helpers'
 // Mixins
 import Overlayable from '@/mixins/Overlayable'
 
-type VueExtendable = typeof Overlayable
 
-// @ts-ignore
-export default Vue.extend<VueExtendable>().extend({
+export default mixins(Overlayable).extend({
   name: 'VueModal',
 
   mixins: [Overlayable],
