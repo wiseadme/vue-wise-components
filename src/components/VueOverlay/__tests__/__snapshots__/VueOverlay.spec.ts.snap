@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VueOverlay.ts contains the color class 1`] = `
+<div
+  class="vue-overlay teal--darken-1"
+  style="opacity: 0.9;"
+/>
+`;

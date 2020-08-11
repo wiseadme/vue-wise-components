@@ -1,53 +1,14 @@
 .vue-modal {
-  @include flex(center, center, column);
-  position: absolute;
-  min-width: 250px;
   width: auto;
-  max-width: 30%;
-  background: $white;
-  border-radius: 6px;
-  box-shadow: $shadow;
-  overflow: hidden;
-  z-index: 3;
 
   &-container {
     @include flex(center, center);
-    position: absolute;
+    position: fixed;
     left: 0;
     right: 0;
     top: 0;
     bottom: 0;
     z-index: 101;
-  }
-
-  &__header {
-    @include flex(center, center);
-    width: 100%;
-  }
-
-  &__window {
-    @include flex(center, center, column);
-    position: absolute;
-    min-width: 250px;
-    background: $white;
-    border-radius: 6px;
-    z-index: 3;
-    box-shadow: $shadow;
-  }
-
-  &__body {
-    @include flex(center, center, column);
-    text-align: center;
-    width: 100%;
-    min-height: 200px;
-    font-weight: 500;
-    font-size: 17px;
     padding: 20px;
-    line-height: 20px;
-  }
-
-  &__footer {
-    @include flex(space-evenly, center);
-    width: 100%;
   }
 }

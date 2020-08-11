@@ -21,11 +21,11 @@
   }
 
   &--selected {
-    color: $white;
+    color: #FFFFFF;
   }
 
   &--disabled {
-    color: $white;
+    color: #FFFFFF;
     background-color: $disabled;
     opacity: .6;
 
@@ -37,7 +37,7 @@
   &__text {
     display: block;
     margin-right: 6px;
-    color: $white;
+    color: #FFFFFF;
   }
 
   &__icon {

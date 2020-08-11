@@ -1,4 +1,6 @@
-@import "functions";
+$white: (
+        'base': #FFFFFF,
+);
 
 $red: (
         'base': #F44336,
@@ -330,7 +332,8 @@ $colors: (
         "deep-orange": $deep-orange,
         "brown": $brown,
         "blue-grey": $blue-grey,
-        "grey": $grey
+        "grey": $grey,
+        "white": $white
 );
 
 @each $name, $color in $colors {

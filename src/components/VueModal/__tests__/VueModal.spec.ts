@@ -5,13 +5,17 @@ import VueModal from '@/components/VueModal'
 describe('VueModal.ts', () => {
   let vm: any | null = null
   beforeEach(() => {
-    vm = mount(VueModal,{
+    vm = mount(VueModal, {
       propsData: {
         overlay: true,
         valid: true
       }
     })
   })
+  it('has overlay component', () => {
+    expect(!!vm.findComponent(VueModal)).toBe(true)
+  })
+
   it('show overlay if passed to true', () => {
     expect(vm.element).toMatchSnapshot()
   })

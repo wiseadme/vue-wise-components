@@ -9,6 +9,15 @@ import { addOnceEventListener } from '@/helpers'
 
 export default Vue.extend({
   name: 'overlayable',
+  props: {
+    overlayOpacity: [Number, String],
+    overlayColor: {
+      type: String,
+      default: () => {
+        return 'white--base'
+      }
+    }
+  },
 
   data() {
     return {
@@ -36,6 +45,8 @@ export default Vue.extend({
 
       setTimeout(() => {
         this.overlayComponent!.active = true
+        this.overlayComponent!.opacity = this.overlayOpacity
+        this.overlayComponent!.color = this.overlayColor
       }, 50)
     },
 
@@ -48,6 +59,7 @@ export default Vue.extend({
       if (this.overlayComponent) {
         this.overlayComponent!.hide = true
         this.overlayComponent!.active = false
+        this.overlayComponent!.opacity = ''
 
         addOnceEventListener(
           this.overlayComponent.$el,

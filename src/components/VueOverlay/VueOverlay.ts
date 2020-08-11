@@ -9,7 +9,9 @@ export default Vue.extend({
   name: 'VueOverlay',
   props: {
     hide: Boolean,
-    active: Boolean
+    active: Boolean,
+    color:String,
+    opacity: [Number, String]
   },
 
   computed: {
@@ -17,6 +19,7 @@ export default Vue.extend({
       return {
         ['vue-overlay--hidden']: this.hide,
         ['vue-overlay--active']: this.active,
+        [this.color]: !!this.color
       }
     }
   },
@@ -26,7 +29,8 @@ export default Vue.extend({
       staticClass: 'vue-overlay',
       class: {
         ...this.classes
-      }
+      },
+      style: {opacity: this.opacity ? this.opacity : ''}
     }, this.$slots.default)
   }
 })

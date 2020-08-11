@@ -1,4 +1,4 @@
-import { VNode, VNodeData } from 'vue/types'
+import { VNode } from 'vue/types'
 import Vue from 'vue'
 
 export function getSlot(
@@ -16,16 +16,22 @@ export function getSlot(
   return undefined
 }
 
-export function createVNode(
-  vm: Vue,
-  tag: string,
-  dataObject: VNodeData,
-  children: any = null
-): VNode | null {
-  if (children) {
-    return vm.$createElement(tag, dataObject, children)
-  }
-  return null
+export function createSimpleFunctional (
+  c: string,
+  el = 'div',
+  name?: string
+) {
+  return Vue.extend({
+    name: name || c.replace(/__/g, '-'),
+
+    functional: true,
+
+    render (h, { data, children }): VNode {
+      data.staticClass = (`${c} ${data.staticClass || ''}`).trim()
+
+      return h(el, data, children)
+    },
+  })
 }
 
 

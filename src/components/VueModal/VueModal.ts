@@ -5,22 +5,17 @@ import './VueModal.scss'
 import { VNode } from 'vue/types'
 import { mixins } from '@/utils/mixins'
 
-// Helpers
-import { getSlot } from '@/helpers'
-
 // Mixins
 import Overlayable from '@/mixins/Overlayable'
-
 
 export default mixins(Overlayable).extend({
   name: 'VueModal',
 
-  mixins: [Overlayable],
-
   props: {
     transition: String,
     overlay: Boolean,
-    value: Boolean
+    value: Boolean,
+    width: [String, Number],
   },
 
   beforeMount() {
@@ -54,26 +49,6 @@ export default mixins(Overlayable).extend({
         }
       }, [content])
     },
-
-    genContent(): VNode[] {
-      const children: VNode[] = []
-      const keys = Object.keys(this.$slots)
-
-      for (const key of keys) {
-
-        if (this.$slots[key]) {
-
-          const vnode = this.$createElement('div', {
-            slot: key,
-            staticClass: `vue-modal__${ key }`
-          }, getSlot(this, key))
-
-          children.push(vnode!)
-        }
-      }
-
-      return children
-    },
   },
 
   computed: {
@@ -93,13 +68,12 @@ export default mixins(Overlayable).extend({
     modal(): VNode {
       return this.$createElement('div', {
         staticClass: 'vue-modal',
-      }, [])
+        style: { maxWidth: this.width + 'px' },
+      }, this.$slots.default)
     }
   },
 
   render(h): VNode {
-    this.modal.children = this.genContent()
-
     this.container.children!.push(this.modal)
 
     return h('transition', {}, [
